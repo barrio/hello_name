@@ -1,18 +1,20 @@
 {% extends "base.html" %}
 
 {% block greeting %}
-<h1>Hello,
-    {% if name %} {{ name }}
-    {% else %} Stranger
-    {% endif %}!
-</h1>
-{% endblock %} <!-- greeting --> 
+<h1>{% if email %} Hello {{ email }}{% endif %}</h1>
+{% endblock %} <!-- greeting -->
 
-{% block name_form %}
+{% block userform %}
 <form method="POST">
-    {{ form.hidden_tag() }} <!-- prevent CSRF -->
-    {{ form.name.label }}<br>
-    {{ form.name() }}<br>
-    {{ form.submit() }}<br>
+    {{ userform.hidden_tag() }} <!-- prevent CSRF -->
+    <p>
+    {{ userform.email.label }}<br>
+    {{ userform.email() }}<br>
+
+    {% for error in userform.email.errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+    </p>
+    {{ userform.submit() }}<br>
 </form>
-{% endblock %} <!-- form -->
+{% endblock %} <!-- userform -->
