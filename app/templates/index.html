@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 
 {% block greeting %}
-<h1>{% if email %} Hello {{ email }}{% endif %}</h1>
+<h1>
+{% if userinput %}
+You entered email {{ userinput.email }} <br>
+     and password {{ userinput.password }}<br>
+     remember_me is {{ userinput.remember_me }}
+{% endif %}
+</h1>
 {% endblock %} <!-- greeting -->
 
 {% block userform %}
@@ -9,12 +15,22 @@
     {{ userform.hidden_tag() }} <!-- prevent CSRF -->
     <p>
     {{ userform.email.label }}<br>
-    {{ userform.email() }}<br>
+    {{ userform.email(size=64) }}<br>
 
     {% for error in userform.email.errors %}
     <span style="color: red;">{{ error }}</span>
     {% endfor %}
     </p>
+    <p>
+    {{ userform.password.label }}<br>
+    {{ userform.password(size=32) }}<br>
+
+    {% for error in userform.password.errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+    </p>
+
+    <p>{{ userform.remember_me() }}{{ userform.remember_me.label }}</p>
     {{ userform.submit() }}<br>
 </form>
 {% endblock %} <!-- userform -->

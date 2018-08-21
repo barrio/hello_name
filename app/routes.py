@@ -7,12 +7,18 @@ from app.forms import UserForm
 @app.route('/', methods=['GET', 'POST'])
 def index():
     userform = UserForm()
+    last_input = session['userinput']
+    session['userinput'] = None
 
     if userform.validate_on_submit():
-        session['email'] = userform.email.data
+        session['userinput'] = {
+            'email': userform.email.data,
+            'password': userform.password.data,
+            'remember_me': userform.remember_me.data
+        }
         return redirect(url_for('index'))
 
     return render_template(
-        'index.html', userform=userform, email=session.get('email')
+        'index.html', userform=userform, userinput=last_input
     )
 
