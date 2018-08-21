@@ -1,0 +1,6 @@
+{% macro print_red(errors) %}
+    {% for error in errors %}
+    <span style="color: red;">{{ error }}</span>
+    {% endfor %}
+{% endmacro %}
+    

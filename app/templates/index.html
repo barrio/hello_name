@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% from 'macros.html' import print_red %}
+
 
 {% block greeting %}
 <h1>
@@ -10,26 +12,20 @@ You entered email {{ userinput.email }} <br>
 </h1>
 {% endblock %} <!-- greeting -->
 
+
 {% block userform %}
 <form method="POST">
     {{ userform.hidden_tag() }} <!-- prevent CSRF -->
     <p>
     {{ userform.email.label }}<br>
     {{ userform.email(size=64) }}<br>
-
-    {% for error in userform.email.errors %}
-    <span style="color: red;">{{ error }}</span>
-    {% endfor %}
+    {{ print_red(userform.email.errors) }}
     </p>
     <p>
     {{ userform.password.label }}<br>
     {{ userform.password(size=32) }}<br>
-
-    {% for error in userform.password.errors %}
-    <span style="color: red;">{{ error }}</span>
-    {% endfor %}
+    {{ print_red(userform.password.errors) }}
     </p>
-
     <p>{{ userform.remember_me() }}{{ userform.remember_me.label }}</p>
     {{ userform.submit() }}<br>
 </form>
