@@ -6,10 +6,10 @@ from app.forms import UserForm
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    userform = UserForm()
-    last_input = session['userinput']
+    last_input = session.get('userinput')
     session['userinput'] = None
 
+    userform = UserForm()
     if userform.validate_on_submit():
         session['userinput'] = {
             'email': userform.email.data,
