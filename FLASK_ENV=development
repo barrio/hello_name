@@ -1,2 +1,0 @@
-export FLASK_APP=hello_name.py
-export FLASK_ENV=development

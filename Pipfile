@@ -12,6 +12,7 @@ flask-migrate = "*"
 [dev-packages]
 flask-shell-ipython = "*"
 flask-debugtoolbar = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.6"
